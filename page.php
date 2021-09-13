@@ -8,23 +8,27 @@
 	$weekday_now = date("N");
 	//echo $weekday_now;
 	//$day_category = "ebamäärane";
-	if($weekday_now <= 5) 
-	{$day_category = "Koolipäev";}
-		else {$day_category = "Puhkepäev";}
-	if($hour_now <8 and $hour_now >23 and $day_category = "Koolipäev") {
+	if($weekday_now <= 4) 
+		{$day_category = "Koolipäev";}
+		if($hour_now <8 and $hour_now >23 ) {
 		$hour_category = "uneaeg";}
 		
-	if($hour_now <9 and $hour_now >24 and $day_category = "Puhkepäev") {
+		if($hour_now >=8 and $hour_now <=18 ) {
+		$hour_category = "tundide aeg";}
+		
+		if($hour_now >18 and $hour_now <=23 ) {
+		$hour_category = "vaba aeg";}
+		
+	else 
+		{$day_category = "Puhkepäev";}
+		
+		if($hour_now <9 and $hour_now >24 ) {
 		$hour_category = "uneaeg";}
 	
-	if($hour_now >=8 and $hour_now <=18 and $day_category = "Koolipäev") {
-	$hour_category = "tundide aeg";}
+		if($hour_now >=9 and $hour_now <=24 ) {
+		$hour_category = "vaba aeg";}
 	
-	if($hour_now >=9 and $hour_now <=24 and $day_category = "Puhkepäev") {
-	$hour_category = "vaba aeg";}
 	
-	if($hour_now >18 and $hour_now <=23 and $day_category = "Koolipäev") {
-	$hour_category = "vaba aeg";}
 		
 		
 		
