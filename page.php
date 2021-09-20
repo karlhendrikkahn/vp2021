@@ -8,25 +8,26 @@
 	$weekday_now = date("N");
 	//echo $weekday_now;
 	//$day_category = "ebamäärane";
-	if($weekday_now <= 4) 
-		{$day_category = "Koolipäev";}
-		if($hour_now <8 and $hour_now >23 ) {
-		$hour_category = "uneaeg";}
-		
+	if($weekday_now <= 5) {
+		$day_category = "Koolipäev";
+		if($hour_now < 8 or $hour_now >= 23 ) {
+			$hour_category = "uneaeg";
+		}
 		if($hour_now >=8 and $hour_now <=18 ) {
-		$hour_category = "tundide aeg";}
-		
+			$hour_category = "tundide aeg";
+		}
 		if($hour_now >18 and $hour_now <=23 ) {
-		$hour_category = "vaba aeg";}
+			$hour_category = "vaba aeg";}
 		
-	else 
-		{$day_category = "Puhkepäev";}
-		
+	} else {
+		$day_category = "Puhkepäev";
 		if($hour_now <9 and $hour_now >24 ) {
-		$hour_category = "uneaeg";}
+			$hour_category = "uneaeg";
+		}
 	
 		if($hour_now >=9 and $hour_now <=24 ) {
-		$hour_category = "vaba aeg";}
+		$hour_category = "vaba aeg";
+		}
 	
 	
 		
@@ -83,10 +84,5 @@
 		<li>SQL päringukeelt</li>
 	</ul>
 	<?php echo $pic_html; ?>
-	<h1>Kodune töö</h1>
-<p>Esimese nädala kodutööks oli koduarvutist kooli veebipuhvriga ühendus luua ning muuta seal asuvat faili.</p>
-<p>Tehtud :)</p>
-
-	
 </body>
 </html>
