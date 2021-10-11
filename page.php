@@ -53,7 +53,7 @@
 			}
 			
 		}
-		
+	}
 		$limit = count($photo_files);
 		$pic_num = mt_rand(0, $limit - 1);
 		$pic_file = $all_files[$pic_num];

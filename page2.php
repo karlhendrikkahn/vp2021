@@ -1,8 +1,15 @@
 <?php
+		//alustame sessiooni
+		session_start();
+		require_once("../../config.php");
+		require_once("fnc_user.php");
 		$author_name = "Karl-Hendrik Kahn";
 		$todays_evaluation = null;
 		$inserted_adjective = null;
 		$adjective_error = null;
+		$password_input_too_short = null;
+		$password_or_email_missing = null;
+		$inserted_email = null;
 		
 		//kontrollin kas on klikitud submit nuppu
 		if(isset($_POST["todays_adjective_input"])) {
@@ -69,7 +76,22 @@
 					$photo_select_html .= "</select> \n";
 		
 
-			
+		//sisselogimine
+			if(isset($_POST["login_submit"])){
+				if(isset($_POST["email_input"]) and isset($_POST["password_input"])){
+					if(!empty($_POST["email_input"]) and !empty($_POST["password_input"])){
+						if(strlen($_POST["password_input"]) > 7){										
+							sign_in($_POST["email_input"], $_POST["password_input"]);
+						} else {
+							$password_input_too_short = "Salasõna peab olema vähemalt 8 karakterit pikk!";
+							$inserted_email = $_POST["email_input"];
+						}
+					} else {						
+						$password_or_email_missing = "Puudub kasutajatunnus ja/või salasõna!";
+						$inserted_email = $_POST["email_input"];
+					}
+				} 					
+			}
 			
 	
 ?>
@@ -86,6 +108,16 @@
 	<h1>Karl-Hendrik Kahn, veebiprogrammeerimine</h1>
 	<p>See leht on valminud õppetöö raames ja ei sisalda mingisugust tõsiseltvõetavat sisu!</p>
 	<p>Õppetöö toimus <a href="https://www.tlu.ee/dt">Tallinna Ülikooli Digitehnoloogiate instituudis</a>.</p>
+	<hr>
+	<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+		<input type="email" name="email_input" placeholder="E-mail ehk kasutajatunnus" value="<?php echo $inserted_email; ?>"> 
+		<input type="password" name="password_input" placeholder="Salasõna">				
+		<input type="submit" name="login_submit" value="Logi sisse">		
+		<span><?php echo $password_input_too_short; ?></span>
+		<span><?php echo $password_or_email_missing; ?></span>		
+	</form>
+	
+	<p>Loo endale <a href="add_user.php">kasutajakonto</a></p>
 	<hr>
 	<form method="POST">
 		<input type="text" name="adjective_input" placeholder="Omadussõna tänase kohta" value="<?php echo $inserted_adjective; ?>">
@@ -112,7 +144,6 @@
 		echo $list_html;
 	?>
 		
-	?>
 	
 
 	
