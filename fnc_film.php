@@ -2,6 +2,71 @@
 
 	$database = "if21_karlh_kahn";
 	
+	function read_all_person($selected){
+		$html = null;
+		$conn = new mysqli($GLOBALS["server_host"], $GLOBALS["server_user_name"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		$conn->set_charset("utf8");
+		//<option value="x">Eesnimi Perekonnanimi</option>
+		$stmt = $conn->prepare("SELECT id, first_name, last_name, birth_date FROM person");
+		$stmt->bind_result($id_from_db, $first_name_from_db, $last_name_from_db, $birth_of_date_from_db);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			$html .= '<option value="' .$id_from_db .'"';
+			if($selected == $id_from_db){
+				$html .= " selected";
+			}
+			$html .= ">" .$first_name_from_db ." " .$last_name_from_db ." (" .$birth_of_date_from_db .")</option> \n";
+		}
+		
+		$stmt->close();
+		$conn->close();
+		return $html;
+	}
+	function read_all_movie($selected){
+		$html = null;
+		$conn = new mysqli($GLOBALS["server_host"], $GLOBALS["server_user_name"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		$conn->set_charset("utf8");
+		//<option value="x">Eesnimi Perekonnanimi</option>
+		$stmt = $conn->prepare("SELECT id, title, production_year FROM movie");
+		$stmt->bind_result($id_from_db, $title_from_db, $production_year_from_db);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			$html .= '<option value="' .$id_from_db .'"';
+			if($selected == $id_from_db){
+				$html .= " selected";
+			}
+			$html .= ">" .$title_from_db ." (" .$production_year_from_db .")</option> \n";
+		}
+		
+		$stmt->close();
+		$conn->close();
+		return $html;
+	}
+		
+		
+	function read_all_position($selected){
+		$html = null;
+		$conn = new mysqli($GLOBALS["server_host"], $GLOBALS["server_user_name"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		$conn->set_charset("utf8");
+		//<option value="x">Eesnimi Perekonnanimi</option>
+		$stmt = $conn->prepare("SELECT id, position_name FROM position");
+		$stmt->bind_result($id_from_db, $position_name_from_db);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			$html .= '<option value="' .$id_from_db .'"';
+			if($selected == $id_from_db){
+				$html .= " selected";
+			}
+			$html .= ">" .$position_name_from_db ." </option> \n";
+		}
+		
+		$stmt->close();
+		$conn->close();
+		return $html;
+	}	
+	
+	//vana kraam
+	
 	function read_all_films() {
 	//avan andmebaasi ühenduse
 	$conn = new mysqli($GLOBALS["server_host"], $GLOBALS["server_user_name"], $GLOBALS["server_password"], $GLOBALS["database"]);

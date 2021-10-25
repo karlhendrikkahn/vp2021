@@ -21,6 +21,7 @@
 		<li><a href="http://greeny.cs.tlu.ee/~karkah/vp2021/user_profile.php">Kasutajaprofiil</a></li>
 		<li><a href="http://greeny.cs.tlu.ee/~karkah/vp2021/list_films.php">Vaata filmide nimekirja</a></li>
 		<li><a href="http://greeny.cs.tlu.ee/~karkah/vp2021/add_films.php">Lisa filme nimekirja</a></li>
+		<li><a href="http://greeny.cs.tlu.ee/~karkah/vp2021/movie_relations.php">Filmi info sidumine</a></li>
 		<li><a href="?logout=1">Logi välja</a></li>
 	</ul>
 	

@@ -16,33 +16,16 @@
 	require_once("fnc_general.php");
 	require_once("fnc_user_profile.php");
 	require("page_header.php");
-	$success = null;
 	$notice = null;
-	$user_description = null;
-	$user_description = read_user_description();
+    $user_description = read_user_description();
 	
-	$user_bgcolor = null;
-	$user_txtcolor = null;
-	$database = "if21_karlh_kahn";
-	$id = null;	
-	$user_bgcolor = null;
-	$user_txtcolor = null;
-	$user_picture = null;
-	$user_id = $_SESSION["user_id"];
-	$store = null;
-	//$store = store_user_profile($id, $user_id, $user_description, $user_bgcolor, $user_txtcolor, $user_picture);
-	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		if(isset($_POST["profile_submit"])){
-			$user_description = test_input(filter_var($_POST["description_input"], FILTER_SANITIZE_STRING));
-			$user_bgcolor = test_input(filter_var($_POST["bg_color_input"]));
-			$user_txtcolor = test_input(filter_var($_POST["text_color_input"]));
-			$store = store_user_profile($id, $user_id, $user_description, $user_bgcolor, $user_txtcolor, $user_picture);
-			$success = "Andmed salvestati edukalt!";
-			
-			
-		}	
+	if(isset($_POST["profile_submit"])){
+		$user_description = test_input($_POST["description_input"]);
+
+		$notice = store_user_profile($user_description, $_POST["bg_color_input"], $_POST["text_color_input"]);
+		$_SESSION["bg_color"] = $_POST["bg_color_input"];
+		$_SESSION["text_color"] = $_POST["text_color_input"];
 	}
-		
 	
 ?>
 
@@ -74,6 +57,6 @@
         <input type="submit" name="profile_submit" value="Salvesta">
     </form>
 	
-    <span><?php echo $success; ?></span>
+    <span><?php echo $notice; ?></span>
 </body>
 </html>
